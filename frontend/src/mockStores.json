@@ -1,0 +1,97 @@
+[
+    {
+        "name": "Trader Joes",
+        "picture": "Picture Route",
+        "description": "MWF 8am - 10pm",
+        "total": "$56.00",
+        "groceries": [
+            {
+                "name": "Tomato1",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            },
+            {
+                "name": "Tomato2",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            },
+            {
+                "name": "Tomato3",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            }
+        ]
+    },
+    [
+        {
+            "name": "Trader Joes",
+            "picture": "Picture Route",
+            "description": "MWF 8am - 10pm",
+            "total": "$56.00",
+            "groceries": [
+                {
+                    "name": "Tomato1",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                },
+                {
+                    "name": "Tomato2",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                },
+                {
+                    "name": "Tomato3",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                }
+            ]
+        },
+        {
+            "name": "Star Market",
+            "picture": "Picture Route",
+            "description": "MWF 8am - 10pm",
+            "total": "$56.00",
+            "groceries": [
+                {
+                    "name": "Tomato1",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                },
+                {
+                    "name": "Tomato2",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                },
+                {
+                    "name": "Tomato3",
+                    "image": "../salmon.png",
+                    "price": "$28.00"
+                }
+            ]
+        },
+    {
+        "name": "Trader Joes",
+        "picture": "Picture Route",
+        "description": "MWF 8am - 10pm",
+        "total": "$56.00",
+        "groceries": [
+            {
+                "name": "Tomato1",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            },
+            {
+                "name": "Tomato2",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            },
+            {
+                "name": "Tomato3",
+                "image": "../salmon.png",
+                "price": "$28.00"
+            }
+        ]
+    }
+    ]
+
+]

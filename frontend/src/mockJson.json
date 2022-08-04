@@ -1,0 +1,27 @@
+[
+        { 
+            "name": "Tomato1",
+            "description": "Tomato grown from Louisiana",
+            "image": "../salmon.png"
+        }, 
+        { 
+            "name": "Tomato2",
+            "description": "Tomato grown from Louisiana",
+            "image": "../salmon.png"
+        }, 
+        { 
+            "name": "Tomato3",
+            "description": "Tomato grown from Louisiana",
+            "image": "../salmon.png"
+        }, 
+        { 
+            "name": "Tomato4",
+            "description": "Tomato grown from Louisiana",
+            "image": "../salmon.png"
+        }, 
+        { 
+            "name": "Tomato5",
+            "description": "Tomato grown from Louisiana",
+            "image": "../salmon.png"
+        }
+]
