@@ -18,6 +18,10 @@ const storeSchema = new mongoose.Schema({
     hours:{
         type: String,
         required: true
+    },
+    shopID: {
+        type: String,
+        required: true
     }
     // item: {
     //     type: mongoose.Schema.Types.ObjectId,
