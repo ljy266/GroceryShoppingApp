@@ -25,6 +25,7 @@ const SearchComponent = ({ searchItemCallback }: SearchComponentProps) => {
         // Send Axios request here
         axios.get("/api/item", { params: { answer: searchValue } }).then(resp => {
           console.log('axios call')
+          console.log(resp.data, 'resp data')
           searchItemCallback(resp.data)
         });
 

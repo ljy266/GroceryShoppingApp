@@ -16,13 +16,26 @@ router.get('/', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get('/item', (req, res) => {
-    console.log(req.query.answer)
+    // console.log(GroItem.findOne({"name": "mango"}).limit(1), "new")
     const temp = req.query.answer
     searchResult = new RegExp(temp, 'i')
-    GroItem.find({name: searchResult})
-        .then((data) => {
-            // console.log('Data:  ', data)
-            res.json(data)
+    GroItem.find({"name": searchResult}).limit(2).then((data) => {
+             const object1 = data[0]
+             const object2 = data[1]
+             const object3 =  {
+                "name": object1.type + " " + object1.name,
+                "image": object1.picUrl,
+                "description": object1.description
+             }
+             const object4 = {
+                "name": object2.type + " " + object1.name,
+                "image": object2.picUrl,
+                "description": object2.description
+             }
+             const newData = [object3, object4]
+             console.log(data[0], 'picUrl')
+            //  console.log(newData)
+             res.json(newData)
         })
         .catch((error) => {
             console.log('Error Message:  ', error)
@@ -44,6 +57,10 @@ router.get('/item1', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get('/store', (req, res) => {
+    //accessdatabase
+    //transform daata
+    //return the correct data
+
     const temp = [
         {
             "name": "Trader Joes",
@@ -97,7 +114,6 @@ router.get('/search', (req, res) => {
     }
     const result = GroItem.find(searchResult)
     res.send(result)
-    //??how to send data back to frontend
 })
 //////////////////////////////////////////////////////////////////////////////////////////////
 

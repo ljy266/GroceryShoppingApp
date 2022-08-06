@@ -16,16 +16,15 @@ export interface cardComponentProps {
 
 //image from cardmedia still needs to work dynamically
 const CardComponent = ({product, groceryListCallback}: cardComponentProps) => {
-  
   return (
     <Card sx={{ width: 345 }} raised>
-      <CardMedia
+      <CardMedia  
         component="img"
         height="140"
-        image={require("../salmon.png")}
+        image={product.image}
         alt="green iguana"
       />
-      <CardContent>
+      <CardContent> 
         <Typography gutterBottom variant="h5" component="div">
           {product.name} 
         </Typography>

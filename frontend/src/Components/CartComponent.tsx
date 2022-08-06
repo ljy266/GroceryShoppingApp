@@ -66,7 +66,7 @@ const CartComponent = ({groceryList, searchItemCallback}: cartComponentProps) =>
                 }
               >
                 <ListItemAvatar>
-                  <Avatar>
+                  <Avatar src={item.image}>
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
