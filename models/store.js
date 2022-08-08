@@ -3,19 +3,19 @@ const mongoose = require('mongoose')
 
 //schema 
 const storeSchema = new mongoose.Schema({
-    storeName:{
+    storeName: {
         type: String,
         required: true
     },
-    image:{
+    image: {
         type: String,
         required: true
     },
-    description:{
+    description: {
         type: String,
         required: true
     },
-    hours:{
+    storeHours: {
         type: String,
         required: true
     },

@@ -16,12 +16,41 @@ router.get('/', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get('/item', (req, res) => {
-    console.log(req.query.answer)
+    // console.log(GroItem.findOne({"name": "mango"}).limit(1), "new")
     const temp = req.query.answer
     searchResult = new RegExp(temp, 'i')
-    GroItem.find({name: searchResult})
+    GroItem.find({ "name": searchResult }).limit(2).then((data) => {
+        const object1 = data[0]
+        const object2 = data[1]
+        const object3 = {
+            "name": object1.type + " " + object1.name,
+            "image": object1.picUrl,
+            "description": object1.description
+        }
+        const object4 = {
+            "name": object2.type + " " + object1.name,
+            "image": object2.picUrl,
+            "description": object2.description
+        }
+        const newData = [object3, object4]
+        //console.log(data[0], 'picUrl')
+        res.json(newData)
+    })
+        .catch((error) => {
+            console.log('Error Message:  ', error)
+        })
+})
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+router.get('/item0', (req, res) => {
+    const temp = req.query.answer
+    searchResult = new RegExp(temp, 'i')
+    GroItem.find({ name: searchResult })
         .then((data) => {
-            // console.log('Data:  ', data)
+            const sid = data[0].shopId
+            const length = data.length
+            console.log(sid)
+            console.log(length)
             res.json(data)
         })
         .catch((error) => {
@@ -30,20 +59,43 @@ router.get('/item', (req, res) => {
 })
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/item1', (req, res) => {
-    console.log(req.query.answer)
-    GroItem.find({name: req.query.answer})
-        .then((data) => {
-            // console.log('Data:  ', data)
-            res.json(data)
+router.get('/store', async (req, res) => {
+    const itemName = JSON.parse(req.query.answer).name
+    newName = itemName.split(' ')
+    //console.log(newName[0])
+    const array = [0, 0, 0, 0, 0, 0, 0, 0]
+    for (let i = 1; i <= 8; i++) {
+        await GroItem.find({ $and: [{ name: newName[1] }, { type: newName[0] }, { shopId: i }] })
+            .then((tempData) => {
+                array[i - 1] = tempData[0].price
+                console.log("price has been saved to array, the new array now is: " + array)
+                console.log('this for loop ran ' + i + 'time(s)')
+            })
+            .catch((error) => {
+                console.log('Error Message:  ', error)
+            })
+        //$and: [{ age: { $gt: 2 } }, { age: { $lte: 4 } }]
+    }
+    const min = Math.min(...array)
+    console.log(min)
+
+    GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
+        .then((tempData2) => {
+            console.log("The lowest priced item is located in store with shopId: "
+                + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
+            // console.log(tempData2)
+            res.json(tempData2)
         })
         .catch((error) => {
             console.log('Error Message:  ', error)
         })
+
+
 })
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/store', (req, res) => {
+router.get('/store0', (req, res) => {
     const temp = [
         {
             "name": "Trader Joes",
@@ -80,13 +132,15 @@ router.get('/store', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// router.get('/temporary', (req, res) => {
-//     const data = {
-//         name: "Tomato2",
-//         description: "Tomato grown from somewhere"
-//     }
-//     res.json(data)
-// })
+router.get('/temporary', (req, res) => {
+    // Store.find({ })
+    //     .then((data) => {
+    //         res.json()
+    //     })
+    //     .catch((error) => {
+    //         console.log('Error Message:  ', error)
+    //     })
+})
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
