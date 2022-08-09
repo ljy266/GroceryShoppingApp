@@ -60,6 +60,8 @@ router.get('/item0', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get('/store', async (req, res) => {
+    let finalReturn1 = {} //grocery item info
+    let finalReturn2 = {} //store info
     const itemName = JSON.parse(req.query.answer).name
     newName = itemName.split(' ')
     //console.log(newName[0])
@@ -79,18 +81,43 @@ router.get('/store', async (req, res) => {
     const min = Math.min(...array)
     console.log(min)
 
-    GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
+    await GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
         .then((tempData2) => {
-            console.log("The lowest priced item is located in store with shopId: "
-                + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
-            // console.log(tempData2)
-            res.json(tempData2)
+            // console.log("The lowest priced item is located in store with shopId: "
+            //     + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
+            finalReturn1 = tempData2
+
         })
         .catch((error) => {
             console.log('Error Message:  ', error)
         })
 
+    await Store.find({ shopID: finalReturn1[0].shopId })
+        .then((tempData3) => {
+            finalReturn2 = tempData3
+            const responseData = [{
+                "name": finalReturn2[0].storeName,
+                "picture": finalReturn2[0].image,
+                "description": finalReturn2[0].description,
+                "total": min,
+                "groceries": [
+                    {
+                        "name": finalReturn1[0].name,
+                        "image": finalReturn1[0].picUrl,
+                        "price": finalReturn1[0].price
+                    }
+                ]
+            }]
+            console.log(finalReturn2[0].image)
+            res.json(responseData)
+        })
+        .catch((error) => {
+            console.log('Error Message:  ', error)
+        })
 
+    // console.log('outsidevalue1 =' + finalReturn1)
+    // console.log('outsidevalue2 =' + finalReturn2)
+    
 })
 
 //////////////////////////////////////////////////////////////////////////////////////////////
