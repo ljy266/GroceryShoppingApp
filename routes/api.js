@@ -60,64 +60,134 @@ router.get('/item0', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 router.get('/store', async (req, res) => {
-    let finalReturn1 = {} //grocery item info
-    let finalReturn2 = {} //store info
-    const itemName = JSON.parse(req.query.answer).name
-    newName = itemName.split(' ')
-    //console.log(newName[0])
-    const array = [0, 0, 0, 0, 0, 0, 0, 0]
-    for (let i = 1; i <= 8; i++) {
-        await GroItem.find({ $and: [{ name: newName[1] }, { type: newName[0] }, { shopId: i }] })
-            .then((tempData) => {
-                array[i - 1] = tempData[0].price
-                console.log("price has been saved to array, the new array now is: " + array)
-                console.log('this for loop ran ' + i + 'time(s)')
+    function manageSingleItem(p1) {
+        let finalReturn1 = {} //grocery item info
+        let finalReturn2 = {} //store info
+        const itemName = JSON.parse(req.query.answer).name
+        newName = itemName.split(' ')
+        //console.log(newName[0])
+        const array = [0, 0, 0, 0, 0, 0, 0, 0]
+        for (let i = 1; i <= 8; i++) {
+            GroItem.find({ $and: [{ name: newName[1] }, { type: newName[0] }, { shopId: i }] })
+                .then((tempData) => {
+                    array[i - 1] = tempData[0].price
+                    console.log("price has been saved to array, the new array now is: " + array)
+                    console.log('this for loop ran ' + i + 'time(s)')
+                })
+                .catch((error) => {
+                    console.log('Error Message:  ', error)
+                })
+            //$and: [{ age: { $gt: 2 } }, { age: { $lte: 4 } }]
+        }
+        const min = Math.min(...array)
+        console.log(min)
+
+        GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
+            .then((tempData2) => {
+                // console.log("The lowest priced item is located in store with shopId: "
+                //     + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
+                finalReturn1 = tempData2
+
             })
             .catch((error) => {
                 console.log('Error Message:  ', error)
             })
-        //$and: [{ age: { $gt: 2 } }, { age: { $lte: 4 } }]
+
+        Store.find({ shopID: finalReturn1[0].shopId })
+            .then((tempData3) => {
+                finalReturn2 = tempData3
+                const responseData = [{
+                    "name": finalReturn2[0].storeName,
+                    "picture": finalReturn2[0].image,
+                    "description": finalReturn2[0].description,
+                    "total": min,
+                    "groceries": [
+                        {
+                            "name": finalReturn1[0].name,
+                            "image": finalReturn1[0].picUrl,
+                            "price": finalReturn1[0].price
+                        }
+                    ]
+                }]
+                console.log(finalReturn2[0].image)
+            })
+            .catch((error) => {
+                console.log('Error Message:  ', error)
+            })
+            return responseData
     }
-    const min = Math.min(...array)
-    console.log(min)
 
-    await GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
-        .then((tempData2) => {
-            // console.log("The lowest priced item is located in store with shopId: "
-            //     + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
-            finalReturn1 = tempData2
+    ////////////function ends////////////
 
-        })
-        .catch((error) => {
-            console.log('Error Message:  ', error)
-        })
+    let checkList = req.query.answer
 
-    await Store.find({ shopID: finalReturn1[0].shopId })
-        .then((tempData3) => {
-            finalReturn2 = tempData3
-            const responseData = [{
-                "name": finalReturn2[0].storeName,
-                "picture": finalReturn2[0].image,
-                "description": finalReturn2[0].description,
-                "total": min,
-                "groceries": [
-                    {
-                        "name": finalReturn1[0].name,
-                        "image": finalReturn1[0].picUrl,
-                        "price": finalReturn1[0].price
-                    }
-                ]
-            }]
-            console.log(finalReturn2[0].image)
-            res.json(responseData)
-        })
-        .catch((error) => {
-            console.log('Error Message:  ', error)
-        })
+    if (checkList[1] != null) {
+        ilist = checkList
+        for (let i = 1; i <= ilist.length; i++) {
 
-    // console.log('outsidevalue1 =' + finalReturn1)
-    // console.log('outsidevalue2 =' + finalReturn2)
+        }
+    }
     
+    else {
+        let finalReturn1 = {} //grocery item info
+        let finalReturn2 = {} //store info
+        const itemName = JSON.parse(req.query.answer).name
+        newName = itemName.split(' ')
+        //console.log(newName[0])
+        const array = [0, 0, 0, 0, 0, 0, 0, 0]
+        for (let i = 1; i <= 8; i++) {
+            await GroItem.find({ $and: [{ name: newName[1] }, { type: newName[0] }, { shopId: i }] })
+                .then((tempData) => {
+                    array[i - 1] = tempData[0].price
+                    console.log("price has been saved to array, the new array now is: " + array)
+                    console.log('this for loop ran ' + i + 'time(s)')
+                })
+                .catch((error) => {
+                    console.log('Error Message:  ', error)
+                })
+            //$and: [{ age: { $gt: 2 } }, { age: { $lte: 4 } }]
+        }
+        const min = Math.min(...array)
+        console.log(min)
+
+        await GroItem.find({ $and: [{ price: min }, { name: newName[1] }, { type: newName[0] }] })
+            .then((tempData2) => {
+                // console.log("The lowest priced item is located in store with shopId: "
+                //     + tempData2[0].shopId + "  and the lowest price is: " + tempData2[0].price)
+                finalReturn1 = tempData2
+
+            })
+            .catch((error) => {
+                console.log('Error Message:  ', error)
+            })
+
+        await Store.find({ shopID: finalReturn1[0].shopId })
+            .then((tempData3) => {
+                finalReturn2 = tempData3
+                const responseData = [{
+                    "name": finalReturn2[0].storeName,
+                    "picture": finalReturn2[0].image,
+                    "description": finalReturn2[0].description,
+                    "total": min,
+                    "groceries": [
+                        {
+                            "name": finalReturn1[0].name,
+                            "image": finalReturn1[0].picUrl,
+                            "price": finalReturn1[0].price
+                        }
+                    ]
+                }]
+                console.log(finalReturn2[0].image)
+                res.json(responseData)
+            })
+            .catch((error) => {
+                console.log('Error Message:  ', error)
+            })
+
+        // console.log('outsidevalue1 =' + finalReturn1)
+        // console.log('outsidevalue2 =' + finalReturn2)
+    }
+
 })
 
 //////////////////////////////////////////////////////////////////////////////////////////////
