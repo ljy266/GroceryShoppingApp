@@ -39,6 +39,8 @@ const CalculationPage = () => {
         //axios call here and reassign storeData to correct data
         axios.get("/api/store", { params: { answer: groceryListState } }).then(resp => {
         setStoreData(resp.data);
+        console.log(resp.data)
+        console.log('hello')
         });
       }, [])
 
