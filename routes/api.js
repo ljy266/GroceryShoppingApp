@@ -263,13 +263,6 @@ router.get('/store', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
     // for (let i = 1; i <= 8; i++) {
     //     await GroItem.find({ $and: [{ name: newName[1] }, { type: newName[0] }, { shopId: i }] })
     //         .then((tempData) => {
