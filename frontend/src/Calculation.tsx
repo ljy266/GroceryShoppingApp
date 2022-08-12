@@ -46,7 +46,7 @@ const CalculationPage = () => {
 
     return (<div>
         <ResponsiveAppBar/>
-        {(storeData.length > 0) && <StoreCardComponent title={storeData[0].name} description={storeData[0].description} imagePath={storeData[0].picture} total={storeData[0].total} groceryList={storeData[0].groceries} />}
+        {(storeData.length > 0) && <StoreCardComponent title={storeData[0].name} description={storeData[0].description} imagePath={storeData[0].picture} total={storeData[0].total} groceryList={storeData[0].groceries} storeHours={storeData[0].storeHours}/>}
     </div>) 
 
 }

@@ -19,25 +19,22 @@ router.get('/item', (req, res) => {
     // console.log(GroItem.findOne({"name": "mango"}).limit(1), "new")
     const temp = req.query.answer
     searchResult = new RegExp(temp, 'i')
-    const array = []
-    const array2 = []
-
-    GroItem.find({ "name": searchResult }).then((data) => {
-        data.map ( (i) => {
-            const nameType = i.type + i.name
-            if (!array.includes(nameType)) {
-                array.push(nameType)
-                array2.push(i)
-            }
-        })
-        
-        const finalArray = array2.map ( (i) => ({
-            "name": i.type + " " + i.name,
-            "image": i.picUrl,
-            "description": i.description
-        }))
-        console.log(finalArray)
-        res.json(finalArray)
+    GroItem.find({ "name": searchResult }).limit(2).then((data) => {
+        const object1 = data[0]
+        const object2 = data[1]
+        const object3 = {
+            "name": object1.type + " " + object1.name,
+            "image": object1.picUrl,
+            "description": object1.description
+        }
+        const object4 = {
+            "name": object2.type + " " + object1.name,
+            "image": object2.picUrl,
+            "description": object2.description
+        }
+        const newData = [object3, object4]
+        //console.log(data[0], 'picUrl')
+        res.json(newData)
     })
         .catch((error) => {
             console.log('Error Message:  ', error)
@@ -249,7 +246,7 @@ router.get('/store', async (req, res) => {
                         "total": min,
                         "groceries": 
                          trueUltimateFind.map ((i) => ({
-                            "name": i.type +" " + i.name,
+                            "name": i.type + i.name,
                             "image": i.picUrl,
                             "price": i.price
                          }))

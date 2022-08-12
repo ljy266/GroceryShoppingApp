@@ -23,7 +23,6 @@ const CardComponent = ({product, groceryListCallback}: cardComponentProps) => {
         component="img"
         height="140"
         image={product.image}
-        alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

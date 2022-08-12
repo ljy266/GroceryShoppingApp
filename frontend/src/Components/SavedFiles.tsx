@@ -50,14 +50,6 @@ interface StoreCardComponentProps {
     alignItems: "center"
     
   }
-  const pageStyle2 = {
-    display: "flex",
-    marginTop: "1rem",
-    marginRight: "1rem",
-    justifyContent: "center",
-    alignItems: "center"
-    
-  }
 
 const StoreCardComponent = ({title, description, imagePath, total, groceryList, storeHours}: StoreCardComponentProps) => {
 
@@ -79,11 +71,11 @@ const StoreCardComponent = ({title, description, imagePath, total, groceryList, 
             subheader={description}
         />
       <CardActions disableSpacing>
-      <Typography variant='h6' sx = {pageStyle2}>
+      <Typography variant='h6'>
         Store Hours: {storeHours}
       </Typography>
-      <Typography variant="h6" color="text.primary" sx = {pageStyle2}>
-            Total Price: {parseFloat(total).toFixed(2)}
+      <Typography variant="h6" color="text.primary">
+            Total Price: {total}
         </Typography>
         <ExpandMore
             expand={expanded}

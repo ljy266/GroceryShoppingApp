@@ -39,6 +39,7 @@ const searchItemStyling = {
   flexDirection: "horizontal",
   flexWrap: "wrap",
   marginTop: "1rem",
+  marginLeft: "2rem",
   gap: "5rem",
   rowGap: "2rem"
 }
@@ -62,7 +63,9 @@ export const App: React.FC = () =>{
 
 
     function setGroceryListCallback (item: searchItemResults) {
-      setGroceryList(prevState => [...prevState, item])
+      if(!groceryList.includes(item)) {
+       setGroceryList(prevState => [...prevState, item])
+      }
     }
 
     function setGroceryListDeleteCallback (item: searchItemResults) {
