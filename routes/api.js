@@ -114,7 +114,7 @@ router.get('/store', async (req, res) => {
             .catch((error) => {
                 console.log('Error Message:  ', error)
             })
-            return responseData
+        return responseData
     }
 
     ////////////function ends////////////
@@ -127,7 +127,7 @@ router.get('/store', async (req, res) => {
 
         }
     }
-    
+
     else {
         let finalReturn1 = {} //grocery item info
         let finalReturn2 = {} //store info
