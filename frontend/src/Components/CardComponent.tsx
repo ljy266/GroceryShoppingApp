@@ -22,7 +22,7 @@ const CardComponent = ({product, groceryListCallback}: cardComponentProps) => {
       <CardMedia
         component="img"
         height="140"
-        image={require("../salmon.png")}
+        image={product.image}
         alt="green iguana"
       />
       <CardContent>
