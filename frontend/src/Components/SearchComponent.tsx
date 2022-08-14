@@ -30,7 +30,7 @@ const SearchComponent = ({ searchItemCallback }: SearchComponentProps) => {
 
         
       }
-    }, 400)
+    }, 200)
     return () => clearTimeout(delayDebounceFn)
   }, [searchValue])
 
