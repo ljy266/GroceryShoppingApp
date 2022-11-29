@@ -9,9 +9,19 @@ const Store = require('../models/store')
 //Routes
 router.get('/', (req, res) => {
     const data = {
-        Message: 'Nothing to see here, this is the api route, reserved'
+        Message: 'testing succeed, end points work!'
     }
     res.json(data)
+})
+//////////////////////////////////////////////////////////////////////////////////////////////
+router.get('/all', (req, res) => {
+    GroItem.find({})
+        .then((data) => {
+            res.json(data)
+        })
+        .catch((error) => {
+            console.log('Error Message:  ', error)
+        })
 })
 //////////////////////////////////////////////////////////////////////////////////////////////
 

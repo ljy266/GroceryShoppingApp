@@ -1,4 +1,4 @@
-Store,Image,Description,Store Hours,shop id
+storeName,image,description,storeHours,shopID
 Eataly Boston,https://www.eataly.com/wp/wp-content/uploads/2016/12/eataly-boston.jpg,"Italian dining emporium with groceries, seafood markets & a dozen eateries.",9am-10PM,1
 Savenor's Butcher & Market ,https://theculinarycellar.com/wp-content/uploads/2020/02/Butcher-store-front-768x576.jpg,"Butcher shop & grocery store specializing in high-end meats, cheeses, bread & produce since 1939.",11AM-7PM,2
 Foodie's Market,https://fastly.4sqi.net/img/general/width960/Mbrk6ZV_OrhQwml2Dzr2vqZea0GV4nUPrRyhOW4io10.jpg,"Gourmet groceries & imported specialty foods, plus sandwiches, a salad bar & hot dishes to go.",8AM-8PM,3
